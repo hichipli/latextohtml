@@ -8,6 +8,7 @@ A lightweight web-based tool that converts LaTeX documents to HTML format, makin
 - Real-time preview
 - Keyboard shortcuts support
 - Export to HTML functionality
+- Offline usage support
 
 ## Why HTML?
 
@@ -18,12 +19,19 @@ A lightweight web-based tool that converts LaTeX documents to HTML format, makin
 
 ## Getting Started
 
-### Usage
+### Online Usage
 
 1. Visit [LaTeXtoHTML](https://hichipli.github.io/latextohtml)
 2. Enter your LaTeX code in the left panel
 3. Click "Compile" or use `Ctrl/Cmd + S` to see the preview
 4. Export to HTML if needed
+
+### Offline Usage
+
+1. Download or clone this repository
+2. All required resources are included in the `lib` directory
+3. Open `index.html` in your web browser
+4. No internet connection required for basic functionality
 
 ### Keyboard Shortcuts
 
@@ -44,11 +52,31 @@ using [Overleaf](https://www.overleaf.com).
 
 ## Development
 
-### Dependencies
+### Dependencies (Included in lib/)
 
 - CodeMirror for the editor
 - MathJax for math rendering
 - Font Awesome for icons
+
+### Project Structure
+
+```
+latextohtml/
+├── css/
+│   └── style.css
+├── js/
+│   ├── latex-parser.js
+│   └── main.js
+├── lib/
+│   ├── css/
+│   │   ├── codemirror.min.css
+│   │   └── nord.min.css
+│   └── js/
+│       ├── codemirror.min.js
+│       ├── mathjax.js
+│       └── stex.min.js
+└── index.html
+```
 
 ## Contributing
 
