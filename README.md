@@ -1,15 +1,20 @@
 # LaTeXtoHTML
 
-A lightweight web-based tool for converting LaTeX documents to HTML format, focusing on basic LaTeX elements and providing real-time preview functionality.
+A lightweight web-based tool that converts LaTeX documents to HTML format, making LaTeX content more accessible through web browsers.
 
 ## Features
 
-- Browser-based LaTeX preview without installation
-- Real-time compilation and preview
-- Enhanced accessibility through HTML output
-- Responsive design for all devices
-- Keyboard shortcuts for common operations
+- Browser-based LaTeX to HTML conversion
+- Real-time preview
+- Keyboard shortcuts support
 - Export to HTML functionality
+
+## Why HTML?
+
+- Enhanced accessibility for screen readers
+- No LaTeX installation required for viewing
+- Easy to share and integrate with web platforms
+- Better reading experience on modern browsers
 
 ## Getting Started
 
@@ -27,21 +32,17 @@ A lightweight web-based tool for converting LaTeX documents to HTML format, focu
 - `Ctrl/Cmd + F`: Find
 - `Alt + P`: Open Preview
 
-## Limitations
+## Current Limitations
 
-This is a basic implementation that supports common LaTeX elements. Complex LaTeX documents or advanced features may not render correctly. For full LaTeX functionality, consider using [Overleaf](https://www.overleaf.com).
+- Basic implementation supporting only common LaTeX elements
+- Limited mobile device support (desktop use recommended)
+- Complex LaTeX documents may not render correctly
+- Exported HTML may require additional styling for optimal mobile viewing
+
+This is a basic implementation that supports common LaTeX elements. Complex LaTeX documents or advanced features may not render correctly. For full LaTeX functionality, consider 
+using [Overleaf](https://www.overleaf.com).
 
 ## Development
-
-### Project Structure
-
-latextohtml/
-├── css/
-│ └── style.css
-├── js/
-│ ├── latex-parser.js
-│ └── main.js
-└── index.html
 
 ### Dependencies
 
