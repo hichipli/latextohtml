@@ -380,11 +380,16 @@ function downloadHTML() {
 
 function generateFullHTML(content) {
     return `<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>LaTeX Preview</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LaTeX document converted to HTML format using LaTeXtoHTML converter. Optimized for academic papers and mathematical content.">
+    <meta name="keywords" content="LaTeX, HTML, academic paper, mathematics, equations, scientific document">
+    <meta name="generator" content="LaTeXtoHTML Converter">
+    <meta name="robots" content="noindex, follow">
+    <title>LaTeX Document | Converted with LaTeXtoHTML</title>
     <script src="../lib/js/mathjax.js"></script>
     <style>
         :root {
