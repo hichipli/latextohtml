@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaTeX Web Preview</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- add MathJax support -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- add CodeMirror -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/nord.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="top-nav">
+            <div class="logo">LaTeXtoHTML</div>
+            <div class="actions">
+                <button id="about-btn" class="btn info" title="About this tool">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                    </svg>
+                    About
+                </button>
+                <button id="compile-btn" class="btn primary" title="Compile (Ctrl/Cmd + S)">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M5.5 5.5L18.5 18.5M5.5 18.5L18.5 5.5"/>
+                    </svg>
+                    Compile
+                    <span class="loading-spinner"></span>
+                </button>
+                <button id="new-window-btn" class="btn secondary">
+                    <svg class="icon" viewBox="0 0 24 24">
+                        <path d="M15 3h6v6M21 3L11 13M21 11v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h7"/>
+                    </svg>
+                    Open Preview
+                </button>
+                <div class="dropdown">
+                    <button class="btn secondary" id="download-btn">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                        </svg>
+                        Export
+                    </button>
+                    <div class="dropdown-content">
+                        <button onclick="downloadHTML()">Export as HTML</button>
+                    </div>
+                </div>
+                <div class="shortcuts-info">
+                    <button class="btn info" id="shortcuts-btn" title="Show Keyboard Shortcuts">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </button>
+                    <div class="shortcuts-panel">
+                        <h3>Keyboard Shortcuts</h3>
+                        <ul>
+                            <li><kbd>Ctrl/Cmd</kbd> + <kbd>S</kbd> Compile</li>
+                            <li><kbd>Ctrl/Cmd</kbd> + <kbd>/</kbd> Toggle Comment</li>
+                            <li><kbd>Ctrl/Cmd</kbd> + <kbd>F</kbd> Find</li>
+                            <li><kbd>Alt</kbd> + <kbd>P</kbd> Open Preview</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <div class="editor-container glass">
+                <div id="latex-editor"></div>
+            </div>
+            <div class="preview-container glass">
+                <div id="preview-content"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/stex/stex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax-full@3/es5/tex-mml-chtml.js"></script>
+    <script src="js/latex-parser.js"></script>
+    <script src="js/main.js"></script>
+
+    <!-- about dialog -->
+    <div id="about-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>About LaTeXtoHTML</h2>
+                <button class="close-btn">&times;</button>
+            </div>
+            
+            <p>LaTeXtoHTML is a basic web-based tool that converts simple LaTeX documents into HTML format. This is a minimal implementation focusing on common LaTeX elements, providing a quick way to preview LaTeX content in a web browser.</p>
+            
+            <div class="features-section">
+                <h4>Why HTML?</h4>
+                <ul>
+                    <li><i class="fas fa-universal-access"></i> Enhanced accessibility for screen readers</li>
+                    <li><i class="fas fa-mobile-alt"></i> Responsive design for all devices</li>
+                </ul>
+            </div>
+            
+            <div class="source-section">
+                <h4>Open Source</h4>
+                <p>View or contribute to the source code:</p>
+                <div class="github-link">
+                    <a href="https://github.com/hichipli/latextohtml" target="_blank" rel="noopener noreferrer">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                        </svg>
+                        View Source on GitHub
+                    </a>
+                </div>
+            </div>
+
+            <div class="notice-section">
+                <div class="notice-box">
+                    <h4>Limited Functionality Notice</h4>
+                    <p>This is a basic converter supporting only common LaTeX elements. For advanced LaTeX editing and compilation, we recommend using:</p>
+                    <a href="https://www.overleaf.com" target="_blank" rel="noopener noreferrer" class="external-link">
+                        <i class="fas fa-external-link-alt"></i>
+                        Try Overleaf
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
